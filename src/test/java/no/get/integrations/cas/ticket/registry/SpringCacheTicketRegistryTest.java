@@ -17,13 +17,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static org.fest.assertions.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/META-INF/integrations-cas-server-integration-springcache-ModuleTestContext.xml")
+@ContextConfiguration("classpath:/META-INF/cas-server-integration-springcache-TestContext.xml")
 public class SpringCacheTicketRegistryTest {
-
-
-    static {
-        System.setProperty("environment", "development");
-    }
 
     @Autowired
     private SpringCacheTicketRegistry springCacheTicketRegistry;

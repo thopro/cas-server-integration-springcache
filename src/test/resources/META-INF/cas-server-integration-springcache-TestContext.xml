@@ -7,7 +7,5 @@
         <property name="cacheManager" ref="cacheManager"/>
     </bean>
 
-    <bean id="cacheManager" class="org.infinispan.spring.provider.SpringEmbeddedCacheManagerFactoryBean">
-        <!--<property name="configurationFileLocation" value="classpath:/META-INF/infinispan-config.xml"/>-->
-    </bean>
+    <bean id="cacheManager" class="org.infinispan.spring.provider.SpringEmbeddedCacheManagerFactoryBean"/>
 </beans>
