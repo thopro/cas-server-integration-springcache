@@ -3,10 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <import resource="classpath*:/META-INF/*ModuleConfig.xml"/>
-    <import resource="classpath*:/META-INF/*ModuleContext.xml"/>
-
     <bean id="ticketRegistry" class="no.get.integrations.cas.ticket.registry.SpringCacheTicketRegistry">
         <property name="cacheManager" ref="cacheManager"/>
+    </bean>
+
+    <bean id="cacheManager" class="org.infinispan.spring.provider.SpringEmbeddedCacheManagerFactoryBean">
+        <!--<property name="configurationFileLocation" value="classpath:/META-INF/infinispan-config.xml"/>-->
     </bean>
 </beans>
