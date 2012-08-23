@@ -1,7 +1,5 @@
 package no.get.integrations.cas.ticket.registry;
 
-
-import no.get.commons.logging.Logger;
 import org.jasig.cas.ticket.Ticket;
 import org.jasig.cas.ticket.registry.AbstractDistributedTicketRegistry;
 import org.springframework.cache.Cache;
