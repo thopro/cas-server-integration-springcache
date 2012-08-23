@@ -1,0 +1,6 @@
+CAS Infinispan Integration
+==========================
+
+* Tested with CAS 3.5, Infinispan 5.1.6
+* Documentation is TODO
+* p.t. The project is migrating so does not build!
