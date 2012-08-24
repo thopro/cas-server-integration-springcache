@@ -2,7 +2,6 @@ package no.get.cas.ticket.registry;
 
 import org.jasig.cas.ticket.Ticket;
 import org.jasig.cas.ticket.registry.AbstractDistributedTicketRegistry;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 
@@ -15,14 +14,13 @@ import java.util.Collection;
 
 public final class SpringCacheTicketRegistry extends AbstractDistributedTicketRegistry {
 
-    @Value("${cache.name}")
-    private String FQN_TICKET;
+    private String cacheName;
 
     private CacheManager cacheManager;
 
     @Override
     protected void updateTicket(Ticket ticket) {
-        cacheManager.getCache(FQN_TICKET).put(ticket.getId(), ticket);
+        cacheManager.getCache(cacheName).put(ticket.getId(), ticket);
     }
 
     @Override
@@ -37,7 +35,7 @@ public final class SpringCacheTicketRegistry extends AbstractDistributedTicketRe
      */
     @Override
     public void addTicket(Ticket ticket) {
-        Cache cache = cacheManager.getCache(FQN_TICKET);
+        Cache cache = cacheManager.getCache(cacheName);
         cache.put(ticket.getId(), ticket);
     }
 
@@ -49,7 +47,7 @@ public final class SpringCacheTicketRegistry extends AbstractDistributedTicketRe
      */
     @Override
     public Ticket getTicket(String ticketId) {
-        Cache.ValueWrapper valueWrapper = cacheManager.getCache(FQN_TICKET).get(ticketId);
+        Cache.ValueWrapper valueWrapper = cacheManager.getCache(cacheName).get(ticketId);
         if (valueWrapper == null) {
             return getProxiedTicketInstance(null);
         }
@@ -69,7 +67,7 @@ public final class SpringCacheTicketRegistry extends AbstractDistributedTicketRe
         if (getTicket(ticketId) == null) {
             return false;
         } else {
-            cacheManager.getCache(FQN_TICKET).evict(ticketId);
+            cacheManager.getCache(cacheName).evict(ticketId);
             return true;
         }
     }
@@ -89,5 +87,9 @@ public final class SpringCacheTicketRegistry extends AbstractDistributedTicketRe
 
     public void setCacheManager(final CacheManager cacheManager) {
         this.cacheManager = cacheManager;
+    }
+
+    public void setCacheName(final String cacheName) {
+        this.cacheName = cacheName;
     }
 }

@@ -6,6 +6,7 @@
 
     <bean id="ticketRegistry" class="no.get.cas.ticket.registry.SpringCacheTicketRegistry">
         <property name="cacheManager" ref="cacheManager"/>
+        <property name="cacheName" value="${cache.name}"/>
     </bean>
 
     <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
