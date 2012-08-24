@@ -1,7 +1,8 @@
-package no.get.integrations.cas.ticket.registry;
+package no.get.cas.ticket.registry;
 
 import org.jasig.cas.ticket.Ticket;
 import org.jasig.cas.ticket.registry.AbstractDistributedTicketRegistry;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 
@@ -14,7 +15,8 @@ import java.util.Collection;
 
 public final class SpringCacheTicketRegistry extends AbstractDistributedTicketRegistry {
 
-    private static final String FQN_TICKET = "cas-store";
+    @Value("${cache.name}")
+    private String FQN_TICKET;
 
     private CacheManager cacheManager;
 
@@ -73,6 +75,8 @@ public final class SpringCacheTicketRegistry extends AbstractDistributedTicketRe
     }
 
     /**
+     * Unsupported in Spring Cache Abstraction.
+     *
      * Retrieve all tickets from the registry.
      *
      * @return collection of tickets currently stored in the registry. Tickets
@@ -80,7 +84,7 @@ public final class SpringCacheTicketRegistry extends AbstractDistributedTicketRe
      */
     @Override
     public Collection<Ticket> getTickets() {
-        throw new UnsupportedOperationException("Spring cache does not support retrieval of entire cached content");
+        throw new UnsupportedOperationException("Spring Cache does not support retrieval of entire cached content. If you used a registry cleaner, please adjust TTL of your cache instead");
     }
 
     public void setCacheManager(final CacheManager cacheManager) {

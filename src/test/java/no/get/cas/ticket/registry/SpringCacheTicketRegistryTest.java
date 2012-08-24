@@ -1,4 +1,4 @@
-package no.get.integrations.cas.ticket.registry;
+package no.get.cas.ticket.registry;
 
 import org.jasig.cas.authentication.Authentication;
 import org.jasig.cas.authentication.ImmutableAuthentication;
